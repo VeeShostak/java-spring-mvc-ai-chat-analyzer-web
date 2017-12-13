@@ -9,7 +9,13 @@
   <url>http://maven.apache.org</url>
   
    <properties>
-        <springframework.version>4.3.4.RELEASE</springframework.version>
+   	<!-- tell Maven the compiler version to use. 1.8 == Java 8 -->
+    <!-- target: generates class files that will work on a given Java version
+    		 source: the Java version of source code accepted -->
+    <maven.compiler.target>1.8</maven.compiler.target> 
+    <maven.compoler.source>1.8</maven.compoler.source>
+   
+  	<springframework.version>4.3.4.RELEASE</springframework.version>
   </properties>
   
   
