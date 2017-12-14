@@ -33,7 +33,56 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+<!-- ======================================================= -->
 
+	<!-- Configuration for Spring + Hibernate -->
+
+    <!-- Step 1: Define Database DataSource / connection pool (5-20 conections, idle time, etc)
+	(C3p0 is an open source JDBC connection pooling library)
+	(Connection pooling is an operation in which a system pre-initializes the connections to be 
+	used in the future. This is done since creating connections at the time of use is an expensive operation))-->
+	<bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass" value="org.postgresql.Driver" />
+        <property name="jdbcUrl" value="jdbc:postgresql://endpoint:port/db" />
+        <property name="user" value="username" />
+        <property name="password" value="password" /> 
+
+        <!-- these are connection pool properties for C3P0 -->
+        <property name="minPoolSize" value="5" />
+        <property name="maxPoolSize" value="20" />
+        <property name="maxIdleTime" value="30000" />
+	</bean>  
+	
+    <!-- Step 2: Setup Hibernate session factory (what hibernate uses to connect to the DB) -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="myDataSource" />
+		<property name="packagesToScan" value="com.github.veeshostak.aiChatAnalyzerWeb.entity" />
+		<property name="hibernateProperties">
+		   <props>
+		      <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</prop>
+		      <prop key="hibernate.show_sql">true</prop>
+		   </props>
+		</property>
+   </bean>	  
+
+    <!-- Step 3: Setup Hibernate transaction manager (make use of Spring Framework’s transactional manager)  -->
+	<bean id="myTransactionManager"
+            class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <!-- Step 4: Enable configuration of transactional behavior based on annotations 
+    (minimize code when starting transaction by using @Transaction annotation)-->
+	<tx:annotation-driven transaction-manager="myTransactionManager" />
+
+
+	<!-- ======================================================= -->
+	
+	<!-- support for reading web resources: css, images, js, etc ... -->
+	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
+	<!-- ** recurse on all subdirectories -->
 	
 	
 	
