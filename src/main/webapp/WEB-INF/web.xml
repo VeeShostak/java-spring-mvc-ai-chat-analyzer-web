@@ -1,7 +1,41 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  <display-name>Ai Chat Analyzer Web</display-name>
+  
+<!--  Spring MVC Configuration -->
+ 
+ 
+  <!-- look for these welcome files in top down fashion. uses the first one it finds -->
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  
+  <!-- 1. Configure Spring MVC Dispatcher Servlet (Front Controller. Web browser sends 
+    request to front controller, it delegates request to other objet or items. Part of the 
+    Spring Framework)
+     -->
+  <servlet>
+    <servlet-name>dispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/ai-chat-analyzer-servlet.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+    
+  </servlet>
+    
+    <!-- 2. Set up URL mappings to Spring MVC Dispatcher Servlet 
+	(for any URL coming in, pass it off to the Dispatcher Servlet(Front Controller)) -->
+	
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+    
+    
+    
+
+  
 </web-app>

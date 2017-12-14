@@ -29,7 +29,6 @@ public class TestDbServlet extends HttpServlet {
 		
 		String jdbcUrl = "jdbc:postgresql://endpoint:port/db";
 		String driver = "org.postgresql.Driver";
-		
 		// get connection to database
 		try {
 			PrintWriter out = response.getWriter();
