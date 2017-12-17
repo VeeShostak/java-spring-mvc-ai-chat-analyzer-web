@@ -95,5 +95,28 @@
   
   <build>
     <finalName>aiChatAnalyzerWeb</finalName>
+    <plugins>
+
+      <!-- The Compiler Plugin is used to compile the sources of your project. -->
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.0</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      
+      <!-- Builds a Web Application Archive (WAR) file from the project output and its dependencies. -->
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+
+    </plugins>
   </build>
+  
 </project>
