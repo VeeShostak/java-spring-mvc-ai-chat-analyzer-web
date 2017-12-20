@@ -38,6 +38,32 @@ public class ChatPostController {
 		return "list-chat-posts";
 	}
 	
+	@PostMapping("/saveChatPost")
+	public String saveCustomer(@ModelAttribute("chatPost") ChatPost theChatPost) {
+		
+		// save the chatPost using service
+		chatPostService.saveChatPost(theChatPost);
+		
+		return "redirect:/chat-post/list";
+	}
+	
+	@GetMapping("/showFormForUpdate")
+	public String showFormForUpdate(@RequestParam("chatPostId") int theId,
+									Model theModel) {
+		//@param theId obtained from chatPostId param in chat-post-list
+		
+		// get the chatPost from our service
+		ChatPost theChatPost = chatPostService.getChatPost(theId);	
+		
+		// set chatPost as a model attribute to pre-populate the 
+		// form that we will send the user to
+		theModel.addAttribute("chatPost", theChatPost);
+		
+		// send over to the form	
+		return "chat-post-form";
+	}
+	
+	
 	@PostMapping("/search")
 	 public String searchChatPosts(@RequestParam("theSearchName") String theSearchName,
                                    Model theModel) {

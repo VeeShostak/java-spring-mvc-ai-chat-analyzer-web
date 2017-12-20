@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import java.sql.Timestamp;
+
 @Entity
 @Table(name="user_chat_posts")
 public class ChatPost {
@@ -30,7 +32,7 @@ public class ChatPost {
 	private boolean machineResponded;
 	
 	@Column(name="created_at")
-	private String createdAt;
+	private Timestamp createdAt;
 	
 	// Bidirectional - ManyToOne - many chatPosts to one user.
 	// Foreign Key, know what user the chatPost belongs to
@@ -38,6 +40,8 @@ public class ChatPost {
 			 	CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name="user_id") // name of column on this table(user_chat_posts) that has the Foreign Key
 	private User userId;
+	
+	
 	
 	// =========
 	
@@ -99,14 +103,16 @@ public class ChatPost {
 	}
 
 
-	public String getCreatedAt() {
+	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
 
 
-	public void setCreatedAt(String createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
+	
+	
 
 
 	@Override
