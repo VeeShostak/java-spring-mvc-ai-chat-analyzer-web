@@ -37,6 +37,19 @@ public class ChatPostController {
 		
 		return "list-chat-posts";
 	}
+	
+	@PostMapping("/search")
+	 public String searchChatPosts(@RequestParam("theSearchName") String theSearchName,
+                                   Model theModel) {
+
+		// search chatPost from the service
+		List<ChatPost> theChatPosts = chatPostService.searchChatPosts(theSearchName);
+		        
+		// add the chatPosts to the model
+		theModel.addAttribute("chatPosts", theChatPosts);
+		
+		return "list-chat-posts";
+   }
 
 
 }

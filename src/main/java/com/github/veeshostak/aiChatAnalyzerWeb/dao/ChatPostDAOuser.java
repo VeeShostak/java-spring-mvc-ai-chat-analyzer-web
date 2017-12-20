@@ -97,7 +97,7 @@ public class ChatPostDAOuser implements ChatPostDAO {
 	    }
 	    else {
 	        // theSearchName is empty, get all ChatPosts
-	        theQuery =currentSession.createQuery("from Customer", ChatPost.class);            
+	        theQuery =currentSession.createQuery("FROM ChatPost", ChatPost.class);
 	    }
 	    
 	    // execute query and get result list
