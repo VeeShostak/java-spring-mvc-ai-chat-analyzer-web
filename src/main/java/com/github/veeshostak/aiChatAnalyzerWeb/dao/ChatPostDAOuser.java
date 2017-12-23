@@ -8,7 +8,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.github.veeshostak.aiChatAnalyzerWeb.entity.ChatPost;
 
@@ -47,6 +46,8 @@ public class ChatPostDAOuser implements ChatPostDAO {
 		// spring saveOrUpdate() determines to save or update
 		// save: insert new ChatPost if new pk
 		// update: update existing ChatPost if pk exists
+		
+		
 		currentSession.saveOrUpdate(theChatPost);
 		
 	}

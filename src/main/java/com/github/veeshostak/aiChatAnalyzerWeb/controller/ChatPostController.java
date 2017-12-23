@@ -38,6 +38,17 @@ public class ChatPostController {
 		return "list-chat-posts";
 	}
 	
+	@GetMapping("/showFormForAdd")
+	public String showFormForAdd(Model theModel) {
+		
+		// create model attribute to bind form data
+		ChatPost theChatPost = new ChatPost();
+		theModel.addAttribute("chatPost", theChatPost); // name value
+		
+		return "chat-post-form";
+	}
+	
+	
 	@PostMapping("/saveChatPost")
 	public String saveCustomer(@ModelAttribute("chatPost") ChatPost theChatPost) {
 		

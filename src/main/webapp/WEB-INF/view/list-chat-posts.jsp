@@ -27,10 +27,10 @@
 		<div id="content">
 		
 			<!-- button to add a chatPosts (calls our spring controller mapping (showFormForAdd)) -->
-			<!-- <input type="button" value="Add ChatPost"
+			<input type="button" value="Add ChatPost"
 				   onclick="window.location.href='showFormForAdd'; return false;"
 				   class="add-button"
-			/> -->
+			/>
 			
 			<!--  search box -->
             <form:form action="search" method="POST">
