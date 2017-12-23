@@ -72,7 +72,7 @@ public class ChatPostDAOuser implements ChatPostDAO {
 		
 		// delete from db with pk(id)
 		Query theQuery = 
-				currentSession.createQuery("delete from user_chat_posts where id=:chatPostId");
+				currentSession.createQuery("delete from ChatPost where id=:chatPostId");
 		theQuery.setParameter("chatPostId", theId);
 		
 		theQuery.executeUpdate();

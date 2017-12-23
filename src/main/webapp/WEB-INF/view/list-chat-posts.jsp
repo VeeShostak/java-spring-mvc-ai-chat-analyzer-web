@@ -52,7 +52,7 @@
 				<!-- print chat posts using loop. access the Model "chatPosts" given from ChatPostsController-->
 				<c:forEach var="tempChatPost" items="${chatPosts}">
 				
-
+					
 					<!-- generate an update link with chatPost id  -->
 					<c:url var="updateLink" value="/chat-post/showFormForUpdate">
 						<c:param name="chatPostId" value="${tempChatPost.id}" />
@@ -60,7 +60,7 @@
 					
 
 					<!-- generate a delete link with chatPost id-->
-					<c:url var="deleteLink" value="/customer/delete">
+					<c:url var="deleteLink" value="/chat-post/delete">
 						<c:param name="chatPostId" value="${tempChatPost.id}" />
 					</c:url>		
 					

@@ -48,6 +48,14 @@ public class ChatPostController {
 		return "chat-post-form";
 	}
 	
+	@GetMapping("/delete")
+	public String deleteChatPost(@RequestParam("chatPostId") int theId) {
+		
+		chatPostService.deleteChatPost(theId);
+		
+		return "redirect:/chat-post/list";
+	}
+	
 	
 	@PostMapping("/saveChatPost")
 	public String saveCustomer(@ModelAttribute("chatPost") ChatPost theChatPost) {
