@@ -15,10 +15,13 @@ import com.github.veeshostak.aiChatAnalyzerWeb.entity.ChatPost;
 // component scan will find  the repository, handle exception translation
 @Repository 
 public class ChatPostDAOuser implements ChatPostDAO {
-
-	// inject the session factory using Field Injection.
-	@Autowired
+	
 	private SessionFactory sessionFactory;
+	
+	@Autowired // spring finds the implementation of sessionFactory (only 1 so no need for qualifier)
+	public ChatPostDAOuser(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 			
 	@Override
 	public List<ChatPost> getChatPosts() {
@@ -71,7 +74,7 @@ public class ChatPostDAOuser implements ChatPostDAO {
 		Session currentSession = sessionFactory.getCurrentSession();
 		
 		// delete from db with pk(id)
-		Query theQuery = 
+		Query<?> theQuery = 
 				currentSession.createQuery("delete from ChatPost where id=:chatPostId");
 		theQuery.setParameter("chatPostId", theId);
 		
@@ -84,7 +87,7 @@ public class ChatPostDAOuser implements ChatPostDAO {
 	    // get the current hibernate session
 	    Session currentSession = sessionFactory.getCurrentSession();
 	    
-	    Query theQuery = null;
+	    Query<ChatPost> theQuery = null;
 	    
 	    if (theSearchName != null && theSearchName.trim().length() > 0) {
 	

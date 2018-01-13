@@ -16,11 +16,18 @@ public class ChatPostServiceUsers implements ChatPostService {
 	// inject ChatPostDAO using Field Injection. Accomplished by using 
 	// Java Reflection technology ( It allows an executing Java program to examine or "introspect" upon
 	// itself, and manipulate internal properties of the program). No need for setter injection methods or constructor injection)
-	@Autowired
-	@Qualifier("chatPostDAOuser") // if we have multiple ChatPost implementations, tell Spring which bean id to use
+	//@Autowired
+	//@Qualifier("chatPostDAOuser") // if we have multiple ChatPost implementations, tell Spring which bean id to use
+	//private ChatPostDAO chatPostDAO;
+	
 	private ChatPostDAO chatPostDAO;
 	
-	// delegate calls to dao
+	// service will delegate calls to dao
+	
+	@Autowired
+	public ChatPostServiceUsers (@Qualifier("chatPostDAOuser") ChatPostDAO chatPostDAO) {
+		this.chatPostDAO = chatPostDAO;
+	}
 	
 	@Override
 	@Transactional

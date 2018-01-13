@@ -20,11 +20,18 @@ import com.github.veeshostak.aiChatAnalyzerWeb.service.ChatPostService;
 @RequestMapping("/chat-post")
 public class ChatPostController {
 	
-	// inject ChatPostServie using Field Injection. @Qualifier("chatPostServiceUsers")
-	@Autowired
-	private ChatPostService chatPostService;
+	// ex: can inject ChatPostServie using Field Injection. @Qualifier("chatPostServiceUsers")
+	// @Autowired
+	
+	private ChatPostService chatPostService; // dependency
 	
 	// =============================
+	
+	// constructor injection
+	@Autowired
+	public ChatPostController(@Qualifier("chatPostServiceUsers") ChatPostService chatPostService) {
+		this.chatPostService = chatPostService;
+	}
 	
 	@GetMapping("/list")
 	public String listChatPosts(Model theModel) {
